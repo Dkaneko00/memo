@@ -42,6 +42,11 @@ def hoge():
                 i -= 1
             live.update(test2(), refresh=True)
 
+@app.command("key")
+def key():
+    while(True):
+        print(ord(getch.getch()))
+
 
 @app.command("layout")
 def layout():

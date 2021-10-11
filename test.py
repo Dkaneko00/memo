@@ -9,6 +9,8 @@ from rich.layout import Layout
 from rich import print
 import shutil
 
+from rich.markdown import Markdown
+
 console = Console()
 console.clear()
 console.width
@@ -42,6 +44,7 @@ def hoge():
                 i -= 1
             live.update(test2(), refresh=True)
 
+
 @app.command("key")
 def key():
     while(True):
@@ -66,18 +69,26 @@ def layout():
 
 
 def lay() -> Layout:
+    md = "#hoge \n - test"
     layout_master.split_row(
         Layout(name="left"),
         Layout(name="right")
     )
     layout_master["right"].ratio = 2
     layout_master["left"].update(test2())
+    layout_master["right"].update(getMD())
     print(layout_master)
     return layout_master
 
+def getMD() -> Markdown:
+    md = "#hoge \n - test"
+    return Markdown(md)
+
+
 
 def test2() -> Table:
-    table = Table(show_header=True, header_style="bold magenta", width=shutil.get_terminal_size().columns/3 - 1)
+    table = Table(show_header=True, header_style="bold magenta",
+                  width=shutil.get_terminal_size().columns / 3 - 1)
     table.add_column("name", justify="right")
     for p in range(len(l)):
         if p == i:

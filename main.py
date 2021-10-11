@@ -6,10 +6,14 @@ import mod.display
 import mod.layout
 import mod.table
 import mod.key
+import mod.markdown
+from rich.console import Console
+console = Console()
 
 key = mod.key.Key()
 table = mod.table.ListTable(key)
-layout = mod.layout.DisplayStyle(table)
+md = mod.markdown.MDDisplay()
+layout = mod.layout.DisplayStyle(table, md)
 app = typer.Typer()
 
 
@@ -22,7 +26,9 @@ def test():
 def show_list():
     display = mod.display.Display(layout)
     display.display()
+    console.clear()
 
 
 if __name__ == "__main__":
     app()
+
